@@ -20,7 +20,6 @@ BASE_VIDEO_URL = 'https://www.youtube.com/watch?v={videoId}'
 BASE_EMBED_URL = 'https://www.googleapis.com/youtube/v3/videos?part=player&id={videoId}&key=api key'
 
 
-
 def build_search_url(search_query: str, max_results: int) -> str:
     '''
     This function takes a search query and the maximum number of results
@@ -44,10 +43,6 @@ def build_search_url(search_query: str, max_results: int) -> str:
     return BASE_YOUTUBE_URL + urllib.parse.urlencode(query_parameters)
 
 
-
-
-
-
 def get_result(url: str) -> 'json':
     '''
     This function takes a URL and returns a Python object representing the
@@ -60,7 +55,7 @@ def get_result(url: str) -> 'json':
         # After the second line, json_text will contain the text of the
         # response, which should be in JSON format.
         response = urllib.request.urlopen(url)
-        json_text = response.read().decode(encoding = 'utf-8')
+        json_text = response.read().decode(encoding='utf-8')
 
         # Given the JSON text, we can use the json.loads() function to convert
         # it to a Python object instead.
@@ -73,7 +68,6 @@ def get_result(url: str) -> 'json':
             response.close()
 
 
-
 def print_title_and_description(json_result: 'json') -> None:
     '''
     This function takes a parsed JSON response from the YouTube Data API's
@@ -81,20 +75,20 @@ def print_title_and_description(json_result: 'json') -> None:
     videos in the response.
     '''
     for item in json_result['items']:
-        print('Title: ',item['snippet']['title'])
-        print('Description: ',item['snippet']['description'])
-        print('Thumbnail: ',item['snippet']['thumbnails']['high'])
-        print("id: ",item['id']['kind'])
+        print('Title: ', item['snippet']['title'])
+        print('Description: ', item['snippet']['description'])
+        print('Thumbnail: ', item['snippet']['thumbnails']['high'])
+        print("id: ", item['id']['kind'])
         kind = item['id']['kind']
         if kind == "youtube#video":
-            print("videoId: ",item['id']['videoId'])
+            print("videoId: ", item['id']['videoId'])
         if kind == "youtube#channel":
-            print("ChannelId: ",item['id']['channelId'])
-     
+            print("ChannelId: ", item['id']['channelId'])
+
         print("\n")
 
 
 if __name__ == '__main__':
-    search_query = input('Query: ')
+    search_query = input('que quieres: ')
     result = get_result(build_search_url(search_query, 10))
     print_title_and_description(result)
