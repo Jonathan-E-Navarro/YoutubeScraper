@@ -75,7 +75,11 @@ def print_title_and_description(json_result: 'json') -> None:
     videos in the response.
     '''
     for item in json_result['items']:
+<<<<<<< HEAD
         print('Title: ', item['snippet']['title'])
+=======
+        print('Title : ', item['snippet']['title'])
+>>>>>>> first branch commit
         print('Description: ', item['snippet']['description'])
         print('Thumbnail: ', item['snippet']['thumbnails']['high'])
         print("id: ", item['id']['kind'])
